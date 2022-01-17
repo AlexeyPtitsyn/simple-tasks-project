@@ -1,0 +1,49 @@
+.task-component {
+  display: flex;
+  border-bottom: 1px solid #eee;
+
+  &.task_component_highlight {
+    background: #ffc;
+  }
+
+  .task-component__space-area {
+    display: block;
+  }
+
+  .task-component__checkbox-area {
+    flex: 0 0 16px;
+  }
+
+  .task-component__text-area {
+    flex: 1 0 auto;
+  }
+
+  .task-component__text-field {
+    box-sizing: border-box;
+    margin: 1px;
+    padding: 0;
+    border: none;
+
+    width: 100%;
+    height: 18px;
+
+    font-family: monospace;
+    font-size: 14px;
+
+    background: transparent;
+
+    resize: none;
+
+    outline: none;
+  }
+
+  .task-component__details-area {
+    flex: 0 0 90px;
+
+    text-align: right;
+
+    color: #555;
+
+    cursor: pointer;
+  }
+}
