@@ -1,7 +1,7 @@
 {
   "name": "simple-tasks-project.git",
   "version": "1.0.0",
-  "description": "",
+  "description": "See README.md",
   "main": "index.js",
   "scripts": {
     "build-dev": "webpack --mode development --watch",
@@ -11,8 +11,8 @@
     "build-and-run-production": "webpack --mode production && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Alexey Ptitsyn",
+  "license": "MIT",
   "dependencies": {
     "css-loader": "^6.5.1",
     "express": "^4.17.2",
