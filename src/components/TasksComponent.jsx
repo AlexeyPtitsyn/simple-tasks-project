@@ -100,11 +100,33 @@ function TasksComponent() {
   };
 
   const moveUp = (item) => {
-    // TODO
+    const index = tasks.findIndex(task => task.id == item.id);
+
+    if(index <= 0) return;
+
+    const newTasks = [...tasks];
+
+    const tmp = newTasks[index];
+    newTasks[index] = newTasks[index - 1];
+    newTasks[index - 1] = tmp;
+
+    setTasks(newTasks);
+    setFocusIndex(index - 1);
   };
 
   const moveDown = (item) => {
-    // TODO
+    const index = tasks.findIndex(task => task.id == item.id);
+
+    if(index >= tasks.length - 1) return;
+
+    const newTasks = [...tasks];
+
+    const tmp = newTasks[index];
+    newTasks[index] = newTasks[index + 1];
+    newTasks[index + 1] = tmp;
+
+    setTasks(newTasks);
+    setFocusIndex(index + 1);
   };
 
   const items = tasks.map((item, index) => {
