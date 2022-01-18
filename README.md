@@ -4,8 +4,7 @@ This project will be written here bit-by-bit.
 
 ## Concept
 
-This is the React application that allows user to make task lists like good-old
-google tasks.
+This is the React task list application that look like good-old google tasks.
 
 ## Task object structure
 
