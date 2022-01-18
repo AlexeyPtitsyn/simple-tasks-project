@@ -44,11 +44,13 @@ function TaskComponent(params) {
   const textareaRef = useRef(null);
 
   // Ajust textarea height:
-  if(textareaRef !== null && textareaRef.current !== null) {
-    textareaRef.current.style.height = "0px";
-    const scrollHeight = textareaRef.current.scrollHeight;
-    textareaRef.current.style.height = scrollHeight + "px";
-  }
+  useEffect(() => {
+    if(textareaRef !== null && textareaRef.current !== null) {
+      textareaRef.current.style.height = "0px";
+      const scrollHeight = textareaRef.current.scrollHeight;
+      textareaRef.current.style.height = scrollHeight + "px";
+    }
+  }, [item]);
 
   const changeCompleted = () => {
     if(item.completed == null) {
