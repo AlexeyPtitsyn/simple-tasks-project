@@ -129,12 +129,38 @@ function TasksComponent() {
     setFocusIndex(index + 1);
   };
 
+  const onInsert = (item) => {
+    const index = tasks.findIndex(task => task.id == item.id);
+
+    const newTask = {
+      id: Date.now(),
+      list: '',
+      text: '',
+      level: 0,
+      created: Date.now(),
+      modified: null,
+      due: null,
+      completed: null,
+      owner: 'user',
+      assignee: 'user'
+    };
+
+    const startOfArray = tasks.slice(0, index+1);
+    const restOfArray = tasks.slice(index+1);
+
+    const newTasks = [...startOfArray].concat([newTask]).concat(restOfArray);
+
+    setTasks(newTasks);
+    setFocusIndex(index + 1);
+  };
+
   const items = tasks.map((item, index) => {
     return (
-      <TaskComponent key={ item.id }
+      <TaskComponent key={ index }
         item={ item }
         isFocused={ focusIndex == index}
         onChange={updateItem}
+        onInsert={onInsert}
         onGoUp={goUp}
         onGoDown={goDown}
         onMoveUp={moveUp}
