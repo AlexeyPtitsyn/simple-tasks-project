@@ -64,11 +64,12 @@ const tasksSource = [
 
 function TasksComponent() {
   const [tasks, setTasks] = useState(tasksSource);
+  const [focusIndex, setFocusIndex] = useState(0);
 
   const updateItem = (newItem) => {
     let newTasks = [];
 
-    tasks.forEach((task, i) => {
+    tasks.forEach((task) => {
       if(task.id == newItem.id) {
         newTasks.push(newItem);
         return;
@@ -80,9 +81,42 @@ function TasksComponent() {
     setTasks(newTasks);
   };
 
-  const items = tasks.map((item) => {
+  const goUp = (item) => {
+    let index = tasks.findIndex(task => task.id == item.id);
+
+    if(index <= 0) return;
+
+    index--;
+    setFocusIndex(index);
+  };
+
+  const goDown = (item) => {
+    let index = tasks.findIndex(task => task.id == item.id);
+
+    if(index >= tasks.length - 1) return;
+
+    index++;
+    setFocusIndex(index);
+  };
+
+  const moveUp = (item) => {
+    // TODO
+  };
+
+  const moveDown = (item) => {
+    // TODO
+  };
+
+  const items = tasks.map((item, index) => {
     return (
-      <TaskComponent key={ item.id } item={ item } onChange={updateItem} />
+      <TaskComponent key={ item.id }
+        item={ item }
+        isFocused={ focusIndex == index}
+        onChange={updateItem}
+        onGoUp={goUp}
+        onGoDown={goDown}
+        onMoveUp={moveUp}
+        onMoveDown={moveDown} />
     );
   });
 

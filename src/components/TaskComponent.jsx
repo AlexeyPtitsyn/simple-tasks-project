@@ -22,14 +22,20 @@ import './TaskComponent.scss';
  */
 
 /**
- * @typedef {Function} OnChange
- * @param {Task} item - Modified task.
+ * @typedef {Function} ChangeCallback
+ * @param {Task} item - Task.
  */
 
 /**
  * @typedef {Object} TaskComponentParams
  * @property {Task} item - Task item.
- * @property {OnChange} onChange - onChage function call.
+ * @property {bool} isFocused - Is item should be focused?
+ * @property {ChangeCallback} onChange - onChage function call.
+ * @property {ChangeCallback} onInsert - on insert new task callback.
+ * @property {ChangeCallback} onGoUp - select previous task key pressed.
+ * @property {ChangeCallback} onGoDown - select next task key pressed.
+ * @property {ChangeCallback} onMoveUp - move task upper key pressed.
+ * @property {ChangeCallback} onMoveDown - move task lower key pressed.
  */
 
 /**
@@ -51,6 +57,13 @@ function TaskComponent(params) {
       textareaRef.current.style.height = scrollHeight + "px";
     }
   }, [item]);
+
+  // Adjust focus
+  useEffect(() => {
+    if(params.isFocused) {
+      textareaRef.current.focus();
+    }
+  }, [params.isFocused]);
 
   const changeCompleted = () => {
     if(item.completed == null) {
@@ -80,6 +93,34 @@ function TaskComponent(params) {
     // Create new record
     if(e.key == 'Enter' && !e.shiftKey) {
       e.preventDefault();
+      params.onInsert(item);
+      return;
+    }
+
+    if(e.key == "ArrowUp") {
+      if(e.altKey) {
+        e.preventDefault();
+        params.onMoveUp(item);
+        return;
+      }
+      
+      if(e.target.selectionStart == 0) {
+        params.onGoUp(item);
+        return;
+      }
+    }
+
+    if(e.key == "ArrowDown") {
+      if(e.altKey) {
+        e.preventDefault();
+        params.onMoveDown(item);
+        return;
+      }
+
+      if(e.target.selectionStart == e.target.value.length) {
+        params.onGoDown(item);
+        return;
+      }
     }
   };
 
@@ -94,8 +135,9 @@ function TaskComponent(params) {
       </div>
       <div className="task-component__text-area">
         <textarea className="task-component__text-field"
-          ref={textareaRef}
-          value={item.text}
+          ref={ textareaRef }
+          value={ item.text }
+          autoFocus={ params.isFocused }
           onChange={(e) => {
             params.onChange({ ...item, text: e.target.value });
           }}
