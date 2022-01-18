@@ -19,9 +19,20 @@ google tasks.
 - `owner` - Task owner login.
 - `assignee` - Whom assigned to login.
 
+## Task list object structure
+
+- `id` - Task list ID.
+- `name` - Task list name.
+- `owner` - Task list owner.
+- `assignee` - Whom this task list is assigned to.
+
 ## Hotkeys
 
 - `Enter` - Create task under current.
 - `Tab` - Make task level higher.
 - `Shift-Tab` - Make task level lower.
 - `Shift-Enter` - Add new line at the current task under cursor position.
+- `Up` - Go to previous task.
+- `Down` - Go to next task.
+- `Alt-Up` - Move task upper.
+- `Alt-Down` - Move task lower.
