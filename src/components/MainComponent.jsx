@@ -76,11 +76,22 @@ function MainComponent() {
     setTasksFocusIndex(index);
   }
 
+  /**
+   * If details button is clicked.
+   * @param {Task} task - Task object.
+   */
+  function onDetailsClick(task) {
+    console.log(task);
+  }
+
   return (
-    <TasksComponent tasks={tasks}
-      onChange={onChangeTasks}
-      focus={tasksFocusIndex}
-      onChangeFocus={onChangeFocus} />
+    <>
+      <TasksComponent tasks={tasks}
+        onChange={onChangeTasks}
+        focus={tasksFocusIndex}
+        onChangeFocus={onChangeFocus}
+        onDetailsClick={onDetailsClick} />
+    </>
   );
 }
 

@@ -29,11 +29,17 @@ const NEW_TASK_TEMPLATE = {
  */
 
 /**
+ * @typedef {Function} DetailsClickCallback
+ * @param {Task} task - Task.
+ */
+
+/**
  * @typedef {Object} TasksComponentParams
  * @property {Task[]} tasks - Tasks.
  * @property {nuber} focus - Focus index.
  * @property {TasksComponentChangeCallback} onChange - onChange callback.
  * @property {TasksComponentChangeFocusCallback} onChangeFocus - on Change focus index.
+ * @property {DetailsClickCallback} onDetailsClick - on details click callback.
  */
 
 /**
@@ -130,7 +136,8 @@ function TasksComponent(params) {
         onGoUp={goUp}
         onGoDown={goDown}
         onMoveUp={moveUp}
-        onMoveDown={moveDown} />
+        onMoveDown={moveDown}
+        onDetailsClick={ params.onDetailsClick } />
     );
   });
 

@@ -16,6 +16,11 @@ import './TaskComponent.scss';
  */
 
 /**
+ * @typedef {Function} DetailsClickCallback
+ * @param {Task} task - Task.
+ */
+
+/**
  * @typedef {Object} TaskComponentParams
  * @property {Task} item - Task item.
  * @property {bool} isFocused - Is item should be focused?
@@ -25,6 +30,7 @@ import './TaskComponent.scss';
  * @property {ChangeCallback} onGoDown - select next task key pressed.
  * @property {ChangeCallback} onMoveUp - move task upper key pressed.
  * @property {ChangeCallback} onMoveDown - move task lower key pressed.
+ * @property {DetailsClickCallback} onDetailsClick - details click callback.
  */
 
 /**
@@ -134,7 +140,9 @@ function TaskComponent(params) {
           onFocus={() => {setHighlight(true)}}
           onBlur={() => {setHighlight(false)}}></textarea>
       </div>
-      <div className="task-component__details-area">
+      <div className="task-component__details-area" onClick={() => {
+        params.onDetailsClick(item);
+      }}>
         Details &gt;
       </div>
     </div>
