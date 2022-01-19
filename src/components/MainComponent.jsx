@@ -6,6 +6,7 @@
 
 import React, { useState } from 'react';
 import TasksComponent from "./TasksComponent.jsx";
+import DetailViewComponent from './DetailViewComponent.jsx';
 
 /** @type {Task[]} */
 const tasksSource = [
@@ -50,6 +51,7 @@ const tasksSource = [
 function MainComponent() {
   const [tasks, setTasks] = useState(tasksSource);
   const [tasksFocusIndex, setTasksFocusIndex] = useState(0);
+  const [detailView, setDetailView] = useState(null);
 
   /**
    * On task changed.
@@ -81,16 +83,28 @@ function MainComponent() {
    * @param {Task} task - Task object.
    */
   function onDetailsClick(task) {
-    console.log(task);
+    setDetailView(task);
   }
 
   return (
     <>
-      <TasksComponent tasks={tasks}
-        onChange={onChangeTasks}
-        focus={tasksFocusIndex}
-        onChangeFocus={onChangeFocus}
-        onDetailsClick={onDetailsClick} />
+      {detailView == null &&
+        <TasksComponent tasks={tasks}
+          onChange={onChangeTasks}
+          focus={tasksFocusIndex}
+          onChangeFocus={onChangeFocus}
+          onDetailsClick={onDetailsClick} />
+      }
+
+      {detailView != null &&
+        <DetailViewComponent task={detailView}
+          onCancel={() => {
+            setDetailView(null);
+          }}
+          onSave={(newTask) => {
+            console.warn('Save task is not implemented yet.');
+          }}/>
+      }
     </>
   );
 }
