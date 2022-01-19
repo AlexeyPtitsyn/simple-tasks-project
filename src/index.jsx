@@ -7,11 +7,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import TasksComponent from './components/TasksComponent.jsx';
+import MainComponent from './components/MainComponent.jsx';
 
 import './index.scss';
 
 ReactDOM.render(
-  <TasksComponent />,
+  <MainComponent />,
   document.getElementById('app')
 );
