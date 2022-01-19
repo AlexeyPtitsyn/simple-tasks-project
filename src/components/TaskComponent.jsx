@@ -49,7 +49,7 @@ function TaskComponent(params) {
   const [highlight, setHighlight] = useState(false);
   const textareaRef = useRef(null);
 
-  // Ajust textarea height:
+  // Adjust textarea height:
   useEffect(() => {
     if(textareaRef !== null && textareaRef.current !== null) {
       textareaRef.current.style.height = "0px";
