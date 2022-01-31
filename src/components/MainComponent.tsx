@@ -5,11 +5,12 @@
  */
 
 import React, { useState } from 'react';
-import TasksComponent from "./TasksComponent.jsx";
-import DetailViewComponent from './DetailViewComponent.jsx';
+import TasksComponent from "./TasksComponent";
+import DetailViewComponent from './DetailViewComponent';
 
-/** @type {Task[]} */
-const tasksSource = [
+import { ITask } from '../globalTypes';
+
+const tasksSource: ITask[] = [
   {
     id: 0,
     list: '',
@@ -55,9 +56,8 @@ function MainComponent() {
 
   /**
    * On task changed.
-   * @param {Task[]} newTasks - New task list.
    */
-  function onChangeTasks(newTasks) {
+  function onChangeTasks(newTasks: ITask[]) {
     const addTasks = [...newTasks];
 
     addTasks.forEach((task) => {
@@ -72,17 +72,15 @@ function MainComponent() {
 
   /**
    * Change tasks focus index.
-   * @param {number} index - New focus index.
    */
-  function onChangeFocus(index) {
+  function onChangeFocus(index: number) {
     setTasksFocusIndex(index);
   }
 
   /**
    * If details button is clicked.
-   * @param {Task} task - Task object.
    */
-  function onDetailsClick(task) {
+  function onDetailsClick(task: ITask) {
     setDetailView(task);
   }
 
@@ -101,7 +99,7 @@ function MainComponent() {
           onCancel={() => {
             setDetailView(null);
           }}
-          onSave={(newTask) => {
+          onSave={(newTask: ITask) => {
             console.warn('Save task is not implemented yet.');
           }}/>
       }

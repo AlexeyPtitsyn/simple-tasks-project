@@ -4,27 +4,19 @@
  * @copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
  */
 
-import '../globalTypes.js';
 import React, { useState } from 'react';
+import { ITask } from '../globalTypes';
 
-/**
- * @typedef {Function} SaveCallback
- * @param {Task} task - Modified task.
- */
-
-/**
- * @typedef {Object} DetailViewComponentParams
- * @property {Task} task - Task.
- * @property {SaveCallback} onSave - Save callback.
- * @property {Function} onCancel - Cancel callback.
- */
+interface IDetailViewComponentProps {
+  task: ITask,
+  onSave: (task: ITask) => void,
+  onCancel: () => void
+}
 
 /**
  * Detail view component.
- * @param {DetailViewComponentParams} params - Task component parameters.
- * @returns {React.Component}
  */
-function DetailViewComponent(params) {
+function DetailViewComponent(params: IDetailViewComponentProps) {
   /** @type Task */
   const [task, setTask] = useState({...params.task});
 

@@ -4,13 +4,11 @@
  * @copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
  */
 
-import '../globalTypes.js';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import TaskComponent from './TaskComponent';
+import { ITask } from '../globalTypes';
 
-import TaskComponent from './TaskComponent.jsx';
-
-/** @type Task */
-const NEW_TASK_TEMPLATE = {
+const NEW_TASK_TEMPLATE: ITask = {
   id: null,
   list: '',
   text: '',
@@ -23,36 +21,23 @@ const NEW_TASK_TEMPLATE = {
   assignee: 'user'
 };
 
-/**
- * @typedef {Function} TasksComponentChangeCallback
- * @param {Task[]} tasks - New Tasks list.
- */
-
-/**
- * @typedef {Function} DetailsClickCallback
- * @param {Task} task - Task.
- */
-
-/**
- * @typedef {Object} TasksComponentParams
- * @property {Task[]} tasks - Tasks.
- * @property {nuber} focus - Focus index.
- * @property {TasksComponentChangeCallback} onChange - onChange callback.
- * @property {TasksComponentChangeFocusCallback} onChangeFocus - on Change focus index.
- * @property {DetailsClickCallback} onDetailsClick - on details click callback.
- */
+interface ITasksComponentProps {
+  tasks: ITask[],
+  focus: number,
+  onChange: (tasks: ITask[]) => void,
+  onChangeFocus: (index: number) => void,
+  onDetailsClick: (task: ITask) => void
+}
 
 /**
  * Task list component.
- * @param {TasksComponentParams} params - Task component parameters.
- * @returns {React.Component}
  */
-function TasksComponent(params) {
+function TasksComponent(params: ITasksComponentProps) {
   const tasks = params.tasks;
   const focusIndex = params.focus;
 
-  const updateItem = (newItem) => {
-    let newTasks = [];
+  const updateItem = (newItem: ITask) => {
+    let newTasks: ITask[] = [];
 
     tasks.forEach((task) => {
       if(task.id == newItem.id) {
@@ -66,7 +51,7 @@ function TasksComponent(params) {
     params.onChange(newTasks);
   };
 
-  const goUp = (item) => {
+  const goUp = (item: ITask) => {
     let index = tasks.findIndex(task => task.id == item.id);
 
     if(index <= 0) return;
@@ -75,7 +60,7 @@ function TasksComponent(params) {
     params.onChangeFocus(index);
   };
 
-  const goDown = (item) => {
+  const goDown = (item: ITask) => {
     let index = tasks.findIndex(task => task.id == item.id);
 
     if(index >= tasks.length - 1) return;
@@ -84,7 +69,7 @@ function TasksComponent(params) {
     params.onChangeFocus(index);
   };
 
-  const moveUp = (item) => {
+  const moveUp = (item: ITask) => {
     const index = tasks.findIndex(task => task.id == item.id);
 
     if(index <= 0) return;
@@ -99,7 +84,7 @@ function TasksComponent(params) {
     params.onChangeFocus(index - 1);
   };
 
-  const moveDown = (item) => {
+  const moveDown = (item: ITask) => {
     const index = tasks.findIndex(task => task.id == item.id);
 
     if(index >= tasks.length - 1) return;
@@ -114,7 +99,7 @@ function TasksComponent(params) {
     params.onChangeFocus(index + 1);
   };
 
-  const onInsert = (item) => {
+  const onInsert = (item: ITask) => {
     const index = tasks.findIndex(task => task.id == item.id);
 
     const startOfArray = tasks.slice(0, index+1);
