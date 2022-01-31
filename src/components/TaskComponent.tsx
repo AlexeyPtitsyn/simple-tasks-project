@@ -4,7 +4,7 @@
  * @copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
  */
 
-import React, { useState, useRef, useEffect, KeyboardEventHandler } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './TaskComponent.scss';
 import { ITask } from '../globalTypes';
 
