@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/index.tsx',
   watchOptions: {
     poll: true,
     ignored: '/node_modules/'
@@ -13,6 +13,11 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.js(x?)$/,
         exclude: /node_modules/,
@@ -44,5 +49,8 @@ module.exports = {
          use: ['file-loader']
        }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   }
 }
