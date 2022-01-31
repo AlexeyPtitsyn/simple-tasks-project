@@ -4,42 +4,26 @@
  * @copyright Alexey Ptitsyn <alexey.ptitsyn@gmail.com>, 2022
  */
 
-import '../globalTypes.js';
-
-import React, { useState, useRef, useEffect } from 'react';
-
+import React, { useState, useRef, useEffect, KeyboardEventHandler } from 'react';
 import './TaskComponent.scss';
+import { ITask } from '../globalTypes';
 
-/**
- * @typedef {Function} ChangeCallback
- * @param {Task} item - Task.
- */
-
-/**
- * @typedef {Function} DetailsClickCallback
- * @param {Task} task - Task.
- */
-
-/**
- * @typedef {Object} TaskComponentParams
- * @property {Task} item - Task item.
- * @property {bool} isFocused - Is item should be focused?
- * @property {ChangeCallback} onChange - onChage function call.
- * @property {ChangeCallback} onInsert - on insert new task callback.
- * @property {ChangeCallback} onGoUp - select previous task key pressed.
- * @property {ChangeCallback} onGoDown - select next task key pressed.
- * @property {ChangeCallback} onMoveUp - move task upper key pressed.
- * @property {ChangeCallback} onMoveDown - move task lower key pressed.
- * @property {DetailsClickCallback} onDetailsClick - details click callback.
- */
+interface ITaskComponentProps {
+  item: ITask,
+  isFocused: boolean,
+  onChange: (item: ITask) => void,
+  onInsert: (item: ITask) => void,
+  onGoUp: (item: ITask) => void,
+  onGoDown: (item: ITask) => void,
+  onMoveUp: (item: ITask) => void,
+  onMoveDown: (item: ITask) => void,
+  onDetailsClick: (task: ITask) => void
+}
 
 /**
  * Single task component.
- * 
- * @param {TaskComponentParams} params Task component params.
- * @returns {React.Component}
  */
-function TaskComponent(params) {
+function TaskComponent(params: ITaskComponentProps) {
   const item = params.item;
   const [highlight, setHighlight] = useState(false);
   const textareaRef = useRef(null);
@@ -69,7 +53,7 @@ function TaskComponent(params) {
     params.onChange({...item, completed: null});
   };
 
-  const keyDown = (e) => {
+  const keyDown = (e: React.KeyboardEvent) => {
     // Change item level
     if(e.key == 'Tab') {
       e.preventDefault();
@@ -99,7 +83,7 @@ function TaskComponent(params) {
         return;
       }
       
-      if(e.target.selectionStart == 0) {
+      if((e.target as HTMLTextAreaElement).selectionStart == 0) {
         params.onGoUp(item);
         return;
       }
@@ -112,7 +96,7 @@ function TaskComponent(params) {
         return;
       }
 
-      if(e.target.selectionStart == e.target.value.length) {
+      if((e.target as HTMLTextAreaElement).selectionStart == (e.target as HTMLTextAreaElement).value.length) {
         params.onGoDown(item);
         return;
       }
