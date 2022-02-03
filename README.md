@@ -6,6 +6,19 @@ This project will be written here bit-by-bit.
 
 This is the React task list application that look like good-old google tasks.
 
+![Screenshot](docs/images/screenshot.png)
+
+## Hotkeys
+
+- `Enter` - Create task under current.
+- `Tab` - Make task level higher.
+- `Shift-Tab` - Make task level lower.
+- `Shift-Enter` - Add new line at the current task under cursor position.
+- `Up` - Go to previous task.
+- `Down` - Go to next task.
+- `Alt-Up` - Move task upper.
+- `Alt-Down` - Move task lower.
+
 ## Task object structure
 
 - `id` - Task global ID.
@@ -24,14 +37,3 @@ This is the React task list application that look like good-old google tasks.
 - `name` - Task list name.
 - `owner` - Task list owner.
 - `assignee` - Whom this task list is assigned to.
-
-## Hotkeys
-
-- `Enter` - Create task under current.
-- `Tab` - Make task level higher.
-- `Shift-Tab` - Make task level lower.
-- `Shift-Enter` - Add new line at the current task under cursor position.
-- `Up` - Go to previous task.
-- `Down` - Go to next task.
-- `Alt-Up` - Move task upper.
-- `Alt-Down` - Move task lower.
